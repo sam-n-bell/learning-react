@@ -1,8 +1,10 @@
 import types from '../actions/actionTypes'
 
-const transasctions = (state = [], action) => {
-    switch (action) {
+const transactions = (state = [], action) => {
+    switch (action.type) {
         case (types.transactions.ADD_TRANSACTION):
+            const id = state.length + 1;
+            action.payload.id = id;
             return [
                 ...state,
                 action.payload
@@ -12,4 +14,4 @@ const transasctions = (state = [], action) => {
     }
 }
 
-export default transasctions
+export default transactions

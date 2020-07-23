@@ -1,28 +1,16 @@
 import React, { useState } from 'react';
-import { TextField, Grid, Button, Box, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
+import { TextField, Grid, Button, Box } from '@material-ui/core'
+import { addTransaction } from '../store/actions'
+import { connect } from 'react-redux'
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: 200,
-        },
-    },
-}));
 
-const TransactionInput = (props) => {
+const TransactionInput = ({ dispatch }) => {
 
     const [description, setDescription] = useState(null);
-    const [transactions, setTransactions] = useState([]);
     const [amount, setAmount] = useState(0);
 
-    const styles = useStyles();
-
     const addTransactionHandler = (event) => {
-        let updated = [...transactions];
-        updated.push({id: transactions.length + 1, description: description, amount: amount})
-        setTransactions(updated)
+        dispatch(addTransaction({description: description, amount: amount}))
     }
 
     return (
@@ -39,13 +27,8 @@ const TransactionInput = (props) => {
                     <Button variant="contained" color="primary" onClick={addTransactionHandler}>Enter</Button>
                 </Box>
             </Grid>
-            {/* <Grid item xs={12}>
-                {transactions.map(tx => (
-                    <Typography key={tx.id}>{tx.id} {tx.description} {tx.amount}</Typography>
-                ))}
-            </Grid> */}
         </Grid>
     )
 }
 
-export default TransactionInput;
+export default connect()(TransactionInput);
