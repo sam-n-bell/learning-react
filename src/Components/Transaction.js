@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Typography, Box, Grid } from '@material-ui/core';
+import { Card, CardContent, Typography, Box, Grid, Button } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { deleteTransaction } from '../store/actions'
 
 const useStyles = makeStyles({
     root: {
@@ -11,6 +13,11 @@ const useStyles = makeStyles({
 const Transaction = (props) => {
     const classes = useStyles();
 
+    const deleteTransactionHandler = (id) => {
+        //https://stackoverflow.com/questions/34226076/why-is-my-onclick-being-called-on-render-react-js
+        props.dispatch(deleteTransaction(id))
+    }
+    console.log(props);
     return (
         <Box mb={5}>
             <Card className={classes.root}>
@@ -25,10 +32,12 @@ const Transaction = (props) => {
                             <Grid item xs={1}></Grid><Grid item xs={6}>{props.amount}</Grid>
                         </Grid>
                     </Typography>
+                    <Grid item xs={10}></Grid>
+                    <Grid item xs={2}><Button variant="contained" color="primary" onClick={() => deleteTransactionHandler(props.id)}>Delete</Button></Grid>
                 </CardContent>
             </Card>
         </Box>
     )
 }
 
-export default Transaction
+export default connect()(Transaction)

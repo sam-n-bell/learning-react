@@ -6,8 +6,8 @@ import { connect } from 'react-redux'
 
 const TransactionInput = ({ dispatch }) => {
 
-    const [description, setDescription] = useState(null);
-    const [amount, setAmount] = useState(0);
+    const [description, setDescription] = useState('hummus');
+    const [amount, setAmount] = useState('2.48');
 
     const addTransactionHandler = (event) => {
         dispatch(addTransaction({description: description, amount: amount}))
@@ -17,10 +17,10 @@ const TransactionInput = ({ dispatch }) => {
 
         <Grid container spacing={3}>
             <Grid item>
-                <TextField label="Description" onChange={(event) => {setDescription(event.target.value)}} />
+                <TextField label="Description" value={description} onChange={(event) => {setDescription(event.target.value)}} />
             </Grid>
             <Grid item>
-                <TextField label="Amount" onChange={(event) => {setAmount(event.target.value)}} />
+                <TextField label="Amount" value={amount} onChange={(event) => {setAmount(event.target.value)}} />
             </Grid>
             <Grid item>
                 <Box mt={1}>
