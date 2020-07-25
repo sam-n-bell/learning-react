@@ -4,7 +4,6 @@ import { Box } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 const TransactionList = (props) => {
-    console.log(props);
     return (
         <Box>
             {props.transactions.map(tx => (
